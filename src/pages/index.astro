@@ -5,17 +5,16 @@ import "@fontsource/public-sans/700";
 import "@fontsource/ibm-plex-mono/500";
 import content from "../../content/home.json";
 
-const { company, about, services, solar, installation, clients, staff, contact } = content;
+const { company, about, services, installation, clients, staff, contact } = content;
 const telHref = `tel:+353${contact.tel.replace(/\s/g, "").replace(/^0/, "")}`;
 const mobileHref = `tel:+353${contact.mobile.replace(/\s/g, "").replace(/^0/, "")}`;
 
 const sections = [
   { id: "about", index: "01", label: "About" },
   { id: "services", index: "02", label: "Services" },
-  { id: "solar", index: "03", label: "Solar" },
-  { id: "installation", index: "04", label: "Installation" },
-  { id: "clients", index: "05", label: "Clients" },
-  { id: "contact", index: "06", label: "Contact" },
+  { id: "installation", index: "03", label: "Installation" },
+  { id: "clients", index: "04", label: "Clients" },
+  { id: "contact", index: "05", label: "Contact" },
 ];
 ---
 
@@ -37,7 +36,7 @@ const sections = [
         <a class="brand" href="#top">{company.shortName} <span>Electrical</span></a>
         <nav aria-label="Sections">
           <ul class="nav-list">
-            {sections.slice(0, 5).map((section) => (
+            {sections.slice(0, 4).map((section) => (
               <li><a href={`#${section.id}`}>{section.label}</a></li>
             ))}
           </ul>
@@ -65,6 +64,11 @@ const sections = [
           <h2 id="about-h">{about.heading}</h2>
           <div class="prose">
             {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            <p class="list-heading">{about.expertiseHeading}</p>
+            <ul class="expertise-list">
+              {about.expertise.map((item) => <li>{item}</li>)}
+            </ul>
+            {about.closingParagraphs.map((paragraph) => <p>{paragraph}</p>)}
           </div>
         </div>
       </section>
@@ -84,19 +88,10 @@ const sections = [
         </div>
       </section>
 
-      <section class="section" id="solar" aria-labelledby="solar-h">
-        <div class="shell">
-          <p class="eyebrow">03 — Solar</p>
-          <h2 id="solar-h">{solar.heading}</h2>
-          <div class="prose">
-            <p>{solar.body}</p>
-          </div>
-        </div>
-      </section>
 
-      <section class="section section-alt" id="installation" aria-labelledby="installation-h">
+      <section class="section" id="installation" aria-labelledby="installation-h">
         <div class="shell">
-          <p class="eyebrow">04 — Installation</p>
+          <p class="eyebrow">03 — Installation</p>
           <h2 id="installation-h">{installation.heading}</h2>
           <div class="prose">
             <p>{installation.intro}</p>
@@ -107,9 +102,9 @@ const sections = [
         </div>
       </section>
 
-      <section class="section" id="clients" aria-labelledby="clients-h">
+      <section class="section section-alt" id="clients" aria-labelledby="clients-h">
         <div class="shell">
-          <p class="eyebrow">05 — Clients</p>
+          <p class="eyebrow">04 — Clients</p>
           <h2 id="clients-h">{clients.heading}</h2>
           <div class="prose">
             <p>{clients.intro}</p>
@@ -131,7 +126,7 @@ const sections = [
 
     <footer class="section contact" id="contact" aria-labelledby="contact-h">
       <div class="shell">
-        <p class="eyebrow">06 — Contact</p>
+        <p class="eyebrow">05 — Contact</p>
         <h2 id="contact-h">{contact.heading}</h2>
         <div class="prose">
           <p>{contact.intro}</p>
@@ -383,6 +378,21 @@ const sections = [
 
   .prose p:last-child {
     margin-bottom: 0;
+  }
+
+  .list-heading {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .expertise-list {
+    margin: 0 0 1.25rem;
+    padding: 0 0 0 1.2rem;
+    color: var(--muted);
+  }
+
+  .expertise-list li {
+    margin-bottom: 0.35rem;
   }
 
   /* ---------- services cards ---------- */

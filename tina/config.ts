@@ -52,7 +52,10 @@ export default defineConfig({
             label: "About section",
             fields: [
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "paragraphs", label: "Paragraphs", list: true, ui: { component: "textarea" } },
+              { type: "string", name: "paragraphs", label: "Opening paragraphs", list: true, ui: { component: "textarea" } },
+              { type: "string", name: "expertiseHeading", label: "Expertise list heading" },
+              { type: "string", name: "expertise", label: "Expertise list", list: true },
+              { type: "string", name: "closingParagraphs", label: "Closing paragraphs", list: true, ui: { component: "textarea" } },
             ],
           },
           {
@@ -64,15 +67,6 @@ export default defineConfig({
             fields: [
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "body", label: "Description", ui: { component: "textarea" } },
-            ],
-          },
-          {
-            type: "object",
-            name: "solar",
-            label: "Solar section",
-            fields: [
-              { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "body", label: "Body", ui: { component: "textarea" } },
             ],
           },
           {

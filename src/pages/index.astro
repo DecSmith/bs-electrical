@@ -1,15 +1,22 @@
 ---
-import "@fontsource/big-shoulders-display/500";
-import "@fontsource/big-shoulders-display/700";
 import "@fontsource/public-sans/400";
 import "@fontsource/public-sans/600";
-import "@fontsource/ibm-plex-mono/400";
+import "@fontsource/public-sans/700";
 import "@fontsource/ibm-plex-mono/500";
 import content from "../../content/home.json";
 
 const { company, about, services, solar, installation, clients, staff, contact } = content;
 const telHref = `tel:+353${contact.tel.replace(/\s/g, "").replace(/^0/, "")}`;
 const mobileHref = `tel:+353${contact.mobile.replace(/\s/g, "").replace(/^0/, "")}`;
+
+const sections = [
+  { id: "about", index: "01", label: "About" },
+  { id: "services", index: "02", label: "Services" },
+  { id: "solar", index: "03", label: "Solar" },
+  { id: "installation", index: "04", label: "Installation" },
+  { id: "clients", index: "05", label: "Clients" },
+  { id: "contact", index: "06", label: "Contact" },
+];
 ---
 
 <html lang="en-IE">
@@ -23,109 +30,159 @@ const mobileHref = `tel:+353${contact.mobile.replace(/\s/g, "").replace(/^0/, ""
     />
   </head>
   <body>
-    <header class="hero">
-      <p class="eyebrow" data-testid="registration-line">{company.registrationLine}</p>
-      <h1>
-        <span class="hero-name">{company.shortName}</span>
-        <span class="hero-descriptor">{company.descriptor}</span>
-      </h1>
-      <p class="tagline">{company.tagline}</p>
-      <div class="hero-actions">
-        <a class="btn btn-copper" href="#contact">Request a quote</a>
-        <a class="btn btn-ghost" href={telHref}>{contact.tel}</a>
+    <a class="skip-link" href="#about">Skip to content</a>
+
+    <header class="site-header">
+      <div class="shell header-row">
+        <a class="brand" href="#top">{company.shortName} <span>Electrical</span></a>
+        <nav aria-label="Sections">
+          <ul class="nav-list">
+            {sections.slice(0, 5).map((section) => (
+              <li><a href={`#${section.id}`}>{section.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <a class="btn header-phone" href={telHref}>{contact.tel}</a>
       </div>
-      <span class="filament" aria-hidden="true"></span>
     </header>
 
-    <main class="rail">
-      <section class="section" id="about" aria-labelledby="about-h">
-        <h2 id="about-h">{about.heading}</h2>
-        {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    <main id="top">
+      <section class="hero">
+        <div class="shell">
+          <p class="hero-reg" data-testid="registration-line">{company.registrationLine}</p>
+          <h1>{company.name}</h1>
+          <p class="lede">{company.tagline}</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Request a quote</a>
+            <a class="btn btn-secondary" href="#services">See our services</a>
+          </div>
+        </div>
       </section>
 
-      <section class="section" id="services" aria-labelledby="services-h">
-        <h2 id="services-h">What we do</h2>
-        <div class="service-cards">
-          {services.map((service) => (
-            <article class="card">
-              <h3>{service.title}</h3>
-              <p>{service.body}</p>
-            </article>
-          ))}
+      <section class="section" id="about" aria-labelledby="about-h">
+        <div class="shell">
+          <p class="eyebrow">01 — About</p>
+          <h2 id="about-h">{about.heading}</h2>
+          <div class="prose">
+            {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="services" aria-labelledby="services-h">
+        <div class="shell">
+          <p class="eyebrow">02 — Services</p>
+          <h2 id="services-h">What we do</h2>
+          <div class="card-grid">
+            {services.map((service) => (
+              <article class="card">
+                <h3>{service.title}</h3>
+                <p>{service.body}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <section class="section" id="solar" aria-labelledby="solar-h">
-        <h2 id="solar-h">{solar.heading}</h2>
-        <p>{solar.body}</p>
+        <div class="shell">
+          <p class="eyebrow">03 — Solar</p>
+          <h2 id="solar-h">{solar.heading}</h2>
+          <div class="prose">
+            <p>{solar.body}</p>
+          </div>
+        </div>
       </section>
 
-      <section class="section" id="installation" aria-labelledby="installation-h">
-        <h2 id="installation-h">{installation.heading}</h2>
-        <p>{installation.intro}</p>
-        <ul class="board" data-testid="installation-services">
-          {installation.items.map((item) => <li>{item}</li>)}
-        </ul>
+      <section class="section section-alt" id="installation" aria-labelledby="installation-h">
+        <div class="shell">
+          <p class="eyebrow">04 — Installation</p>
+          <h2 id="installation-h">{installation.heading}</h2>
+          <div class="prose">
+            <p>{installation.intro}</p>
+          </div>
+          <ul class="service-list" data-testid="installation-services">
+            {installation.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
       </section>
 
       <section class="section" id="clients" aria-labelledby="clients-h">
-        <h2 id="clients-h">{clients.heading}</h2>
-        <p>{clients.intro}</p>
-        <dl class="client-list">
-          {clients.entries.map((client) => (
-            <div class="client">
-              <dt>{client.name}</dt>
-              {client.projects.map((project) => <dd>{project}</dd>)}
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      <section class="section" id="staff" aria-labelledby="staff-h">
-        <h2 id="staff-h">{staff.heading}</h2>
-        {staff.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="shell">
+          <p class="eyebrow">05 — Clients</p>
+          <h2 id="clients-h">{clients.heading}</h2>
+          <div class="prose">
+            <p>{clients.intro}</p>
+          </div>
+          <dl class="client-list">
+            {clients.entries.map((client) => (
+              <div class="client">
+                <dt>{client.name}</dt>
+                {client.projects.map((project) => <dd>{project}</dd>)}
+              </div>
+            ))}
+          </dl>
+          <div class="prose quality-note">
+            {staff.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </div>
       </section>
     </main>
 
-    <footer class="contact" id="contact" aria-labelledby="contact-h">
-      <h2 id="contact-h">{contact.heading}</h2>
-      <p class="contact-intro">{contact.intro}</p>
-      <dl class="contact-grid">
-        <div>
-          <dt>Tel</dt>
-          <dd><a href={telHref}>{contact.tel}</a></dd>
+    <footer class="section contact" id="contact" aria-labelledby="contact-h">
+      <div class="shell">
+        <p class="eyebrow">06 — Contact</p>
+        <h2 id="contact-h">{contact.heading}</h2>
+        <div class="prose">
+          <p>{contact.intro}</p>
         </div>
-        <div>
-          <dt>Mobile</dt>
-          <dd><a href={mobileHref}>{contact.mobile}</a></dd>
-        </div>
-        <div>
-          <dt>Email</dt>
-          <dd><a href={`mailto:${contact.email}`}>{contact.email}</a></dd>
-        </div>
-      </dl>
-      <p class="footer-reg">{company.name} · {company.registrationLine}</p>
+        <dl class="contact-grid">
+          <div>
+            <dt>Tel</dt>
+            <dd><a href={telHref}>{contact.tel}</a></dd>
+          </div>
+          <div>
+            <dt>Mobile</dt>
+            <dd><a href={mobileHref}>{contact.mobile}</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href={`mailto:${contact.email}`}>{contact.email}</a></dd>
+          </div>
+        </dl>
+        <p class="footer-reg">{company.name} · {company.registrationLine}</p>
+      </div>
     </footer>
   </body>
 </html>
 
 <style>
   :root {
-    --ink: #171a1e;
-    --ink-soft: #2a2f36;
-    --fog: #eef1f3;
     --white: #ffffff;
-    --blue: #1789c6;
-    --copper: #b06a2c;
-    --copper-bright: #d98f4a;
-    --display: "Big Shoulders Display", sans-serif;
+    --tint: #f6f8fa;
+    --line: #e3e8ec;
+    --ink: #1a1d21;
+    --muted: #556070;
+    --accent: #0f6ea3;
+    --accent-dark: #0c5a86;
     --body: "Public Sans", system-ui, sans-serif;
     --mono: "IBM Plex Mono", monospace;
-    --rail-x: clamp(1.25rem, 6vw, 4rem);
+    --shell: 64rem;
   }
 
   * {
     box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
@@ -134,54 +191,124 @@ const mobileHref = `tel:+353${contact.mobile.replace(/\s/g, "").replace(/^0/, ""
     font-size: 1.0625rem;
     line-height: 1.65;
     color: var(--ink);
-    background: var(--fog);
+    background: var(--white);
+  }
+
+  .shell {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--ink);
+    color: var(--white);
+    padding: 0.6rem 1rem;
+    z-index: 20;
+  }
+
+  .skip-link:focus {
+    left: 0;
+  }
+
+  /* ---------- header ---------- */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 3.75rem;
+  }
+
+  .brand {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .brand span {
+    color: var(--accent);
+  }
+
+  .nav-list {
+    display: flex;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .nav-list a {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .nav-list a:hover {
+    color: var(--accent);
+  }
+
+  .header-phone {
+    margin-left: auto;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .header-phone:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 48rem) {
+    .nav-list {
+      display: none;
+    }
   }
 
   /* ---------- hero ---------- */
   .hero {
-    position: relative;
-    background: var(--ink);
-    color: var(--white);
-    padding: clamp(4rem, 12vh, 7rem) var(--rail-x) clamp(3.5rem, 10vh, 6rem);
-    overflow: hidden;
+    padding-block: clamp(4rem, 14vh, 8rem);
+    border-bottom: 1px solid var(--line);
   }
 
-  .eyebrow {
+  .hero-reg {
     font-family: var(--mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--copper-bright);
-    margin: 0 0 1.5rem;
+    color: var(--accent);
+    margin: 0 0 1.25rem;
   }
 
   .hero h1 {
-    margin: 0;
-    font-family: var(--display);
-    text-transform: uppercase;
-    line-height: 0.95;
-  }
-
-  .hero-name {
-    display: block;
+    font-size: clamp(2.1rem, 6vw, 3.75rem);
     font-weight: 700;
-    font-size: clamp(3rem, 11vw, 7rem);
-    letter-spacing: 0.01em;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    margin: 0 0 1.25rem;
+    max-width: 22ch;
   }
 
-  .hero-descriptor {
-    display: block;
-    font-weight: 500;
-    font-size: clamp(1.4rem, 4.5vw, 2.75rem);
-    letter-spacing: 0.14em;
-    color: var(--blue);
-    margin-top: 0.35rem;
-  }
-
-  .tagline {
-    max-width: 34rem;
-    margin: 2rem 0 2.5rem;
-    color: #c8cdd3;
+  .lede {
+    font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+    color: var(--muted);
+    max-width: 36rem;
+    margin: 0 0 2.25rem;
   }
 
   .hero-actions {
@@ -192,227 +319,206 @@ const mobileHref = `tel:+353${contact.mobile.replace(/\s/g, "").replace(/^0/, ""
 
   .btn {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
-    font-family: var(--mono);
-    font-size: 0.9rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
     text-decoration: none;
-    border: 1px solid transparent;
   }
 
-  .btn-copper {
-    background: var(--copper);
+  .btn-primary {
+    background: var(--accent);
     color: var(--white);
   }
 
-  .btn-copper:hover {
-    background: var(--copper-bright);
+  .btn-primary:hover {
+    background: var(--accent-dark);
   }
 
-  .btn-ghost {
-    border-color: #3d434b;
-    color: var(--white);
+  .btn-secondary {
+    border: 1px solid var(--line);
+    color: var(--ink);
   }
 
-  .btn-ghost:hover {
-    border-color: var(--copper-bright);
-    color: var(--copper-bright);
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
-  /* filament: the glowing conductor entering the page from the hero */
-  .filament {
-    position: absolute;
-    left: var(--rail-x);
-    bottom: 0;
-    width: 2px;
-    height: clamp(2.5rem, 8vh, 5rem);
-    background: linear-gradient(to bottom, transparent, var(--copper-bright));
-    box-shadow: 0 0 12px 1px rgba(217, 143, 74, 0.6);
-  }
-
-  /* ---------- circuit rail ---------- */
-  .rail {
-    position: relative;
-    padding: 1rem 0 3rem;
-  }
-
-  .rail::before {
-    content: "";
-    position: absolute;
-    left: var(--rail-x);
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--copper);
-    opacity: 0.55;
-  }
-
+  /* ---------- sections ---------- */
   .section {
-    position: relative;
-    max-width: 46rem;
-    padding: clamp(2rem, 6vh, 3.5rem) var(--rail-x) 0
-      calc(var(--rail-x) + 2.25rem);
+    padding-block: clamp(3.5rem, 10vh, 6rem);
   }
 
-  /* junction node at each section heading */
-  .section h2::before {
-    content: "";
-    position: absolute;
-    left: calc(var(--rail-x) - 5px);
-    width: 12px;
-    height: 12px;
-    margin-top: 0.55em;
-    border-radius: 50%;
-    background: var(--fog);
-    border: 2px solid var(--copper);
+  .section-alt {
+    background: var(--tint);
+    border-block: 1px solid var(--line);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
   }
 
   .section h2 {
-    font-family: var(--display);
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    margin: 0 0 1rem;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    margin: 0 0 1.25rem;
   }
 
-  /* ---------- services ---------- */
-  .service-cards {
+  .prose {
+    max-width: 42rem;
+  }
+
+  .prose p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+  }
+
+  .prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ---------- services cards ---------- */
+  .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
     gap: 1rem;
+    margin-top: 2rem;
   }
 
   .card {
     background: var(--white);
-    border-top: 3px solid var(--blue);
-    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    padding: 1.75rem;
   }
 
   .card h3 {
-    font-family: var(--display);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 1.25rem;
-    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.6rem;
   }
 
   .card p {
     margin: 0;
+    color: var(--muted);
+    font-size: 0.98rem;
   }
 
-  /* ---------- installation "distribution board" ---------- */
-  .board {
+  /* ---------- installation list ---------- */
+  .service-list {
     list-style: none;
-    margin: 1.5rem 0 0;
+    margin: 2rem 0 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-    gap: 1px;
-    background: #d5dade;
-    border: 1px solid #d5dade;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 0.6rem 2rem;
+    max-width: 52rem;
   }
 
-  .board li {
-    background: var(--white);
-    padding: 0.85rem 1rem;
-    font-size: 0.9rem;
-    font-family: var(--mono);
+  .service-list li {
+    padding: 0.55rem 0 0.55rem 1.4rem;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.98rem;
+  }
+
+  .service-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.05rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--accent);
   }
 
   /* ---------- clients ---------- */
   .client-list {
-    margin: 1.5rem 0 0;
+    margin: 2rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1rem;
   }
 
   .client {
-    margin-bottom: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
   }
 
   .client dt {
-    font-weight: 600;
-    color: var(--blue);
-    margin-bottom: 0.25rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
   }
 
   .client dd {
-    margin: 0 0 0.2rem;
+    margin: 0 0 0.3rem;
+    color: var(--muted);
     font-size: 0.95rem;
+  }
+
+  .quality-note {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
   }
 
   /* ---------- contact ---------- */
   .contact {
-    background: var(--ink);
-    color: var(--white);
-    padding: clamp(3rem, 8vh, 5rem) var(--rail-x);
-  }
-
-  .contact h2 {
-    font-family: var(--display);
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: clamp(1.8rem, 5vw, 2.6rem);
-    margin: 0 0 1rem;
-  }
-
-  .contact-intro {
-    max-width: 34rem;
-    color: #c8cdd3;
-    margin: 0 0 2rem;
+    background: var(--tint);
+    border-top: 1px solid var(--line);
   }
 
   .contact-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 2.5rem;
-    margin: 0 0 2.5rem;
+    margin: 2rem 0 2.5rem;
   }
 
   .contact-grid dt {
     font-family: var(--mono);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--copper-bright);
+    letter-spacing: 0.06em;
+    color: var(--muted);
     margin-bottom: 0.25rem;
   }
 
   .contact-grid dd {
     margin: 0;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
   .contact-grid a {
-    color: var(--white);
+    color: var(--accent);
     text-decoration: none;
-    border-bottom: 1px solid var(--copper);
   }
 
   .contact-grid a:hover {
-    color: var(--copper-bright);
+    color: var(--accent-dark);
+    text-decoration: underline;
   }
 
   .footer-reg {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: #7d858e;
+    font-size: 0.85rem;
+    color: var(--muted);
     margin: 0;
   }
 
   a:focus-visible,
   .btn:focus-visible {
-    outline: 2px solid var(--copper-bright);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
-  }
-
-  @media (max-width: 40rem) {
-    .rail::before,
-    .filament,
-    .section h2::before {
-      display: none;
-    }
-
-    .section {
-      padding-left: var(--rail-x);
-    }
   }
 </style>

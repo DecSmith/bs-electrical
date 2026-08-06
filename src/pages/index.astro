@@ -6,7 +6,17 @@ import "@fontsource/ibm-plex-mono/500";
 import content from "../../content/home.json";
 import PylonArt from "../components/PylonArt.astro";
 
-const { company, about, services, installation, clients, staff, contact } = content;
+const { company, about, services, installation, clients, staff, contact, domestic } = content;
+
+const [featuredClient, ...otherClients] = clients.entries;
+
+const splitProject = (project) => {
+  const match = project.match(/^([0-9]{4}(?:\u2013[0-9]{4}|-[0-9]{4})?):\s*(.*)$/);
+  if (match) {
+    return { year: match[1], detail: match[2] };
+  }
+  return { year: null, detail: project };
+};
 const telHref = `tel:+353${contact.tel.replace(/\s/g, "").replace(/^0/, "")}`;
 const mobileHref = `tel:+353${contact.mobile.replace(/\s/g, "").replace(/^0/, "")}`;
 
@@ -111,14 +121,41 @@ const sections = [
           <div class="prose">
             <p>{clients.intro}</p>
           </div>
-          <dl class="client-list">
-            {clients.entries.map((client) => (
-              <div class="client">
-                <dt>{client.name}</dt>
-                {client.projects.map((project) => <dd>{project}</dd>)}
-              </div>
+          <article class="featured-client">
+            <div class="featured-head">
+              <h3>{featuredClient.name}</h3>
+              <p class="featured-meta">{featuredClient.projects.length} developments</p>
+            </div>
+            <ul class="project-grid">
+              {featuredClient.projects.map((project) => {
+                const { year, detail } = splitProject(project);
+                return (
+                  <li>
+                    {year && <span class="project-year">{year}</span>}
+                    <span>{detail}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </article>
+          <div class="client-row">
+            {otherClients.map((client) => (
+              <article class="client-card">
+                <div class="client-card-head">
+                  <h3>{client.name}</h3>
+                  {client.tag && <span class="client-tag">{client.tag}</span>}
+                </div>
+                {client.projects.map((project) => <p>{project}</p>)}
+              </article>
             ))}
-          </dl>
+          </div>
+          <div class="domestic-block">
+            <h3>{domestic.heading}</h3>
+            <p class="domestic-intro">{domestic.intro}</p>
+            <ul class="domestic-list">
+              {domestic.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
           <div class="prose quality-note">
             {staff.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
           </div>
@@ -494,28 +531,133 @@ const sections = [
   }
 
   /* ---------- clients ---------- */
-  .client-list {
-    margin: 2rem 0 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    gap: 1rem;
-  }
-
-  .client {
+  .featured-client {
+    background: var(--white);
     border: 1px solid var(--line);
     border-radius: 0.75rem;
-    padding: 1.5rem;
+    padding: 1.75rem;
+    margin-top: 2rem;
   }
 
-  .client dt {
+  .featured-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .featured-client h3,
+  .client-card h3,
+  .domestic-block h3 {
+    font-size: 1.1rem;
     font-weight: 700;
+    margin: 0;
+  }
+
+  .featured-meta {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .project-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 0.4rem 2rem;
+  }
+
+  .project-grid li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .project-year {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .client-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .client-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .client-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
     margin-bottom: 0.4rem;
   }
 
-  .client dd {
-    margin: 0 0 0.3rem;
+  .client-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    background: #e7f1f8;
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    white-space: nowrap;
+  }
+
+  .client-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .domestic-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .domestic-intro {
     color: var(--muted);
     font-size: 0.95rem;
+    margin: 0.4rem 0 0.75rem;
+  }
+
+  .domestic-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .domestic-list li {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.9rem;
   }
 
   .quality-note {

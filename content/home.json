@@ -79,19 +79,22 @@
         "name": "Nspace Ltd",
         "projects": [
           "Commercial and domestic installations"
-        ]
+        ],
+        "tag": "Commercial & domestic"
       },
       {
         "name": "Space Storage",
         "projects": [
           "Commercial installation and maintenance"
-        ]
+        ],
+        "tag": "Commercial"
       },
       {
         "name": "Winsac Ltd",
         "projects": [
           "Barnagearagh Cove, Skerries, Co. Dublin — housing project & solar panel installation"
-        ]
+        ],
+        "tag": "Housing & solar"
       }
     ]
   },
@@ -109,5 +112,14 @@
     "mobile": "087 609 2905",
     "email": "info@barrysmithelectrical.ie",
     "linkedin": "https://www.linkedin.com/in/barry-smith-b29a8a421/"
+  },
+  "domestic": {
+    "heading": "Domestic work",
+    "intro": "Alongside developments and commercial contracts, we carry out domestic jobs across Dublin and Leinster:",
+    "items": [
+      "House rewires",
+      "Extensions and renovations",
+      "EV car charger installations"
+    ]
   }
 }

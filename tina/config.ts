@@ -94,9 +94,20 @@ export default defineConfig({
                 ui: { itemProps: (item) => ({ label: item?.name }) },
                 fields: [
                   { type: "string", name: "name", label: "Client name" },
+                  { type: "string", name: "tag", label: "Category tag (small clients)" },
                   { type: "string", name: "projects", label: "Projects", list: true },
                 ],
               },
+            ],
+          },
+          {
+            type: "object",
+            name: "domestic",
+            label: "Domestic work",
+            fields: [
+              { type: "string", name: "heading", label: "Heading" },
+              { type: "string", name: "intro", label: "Intro", ui: { component: "textarea" } },
+              { type: "string", name: "items", label: "Job types", list: true },
             ],
           },
           {

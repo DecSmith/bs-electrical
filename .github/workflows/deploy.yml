@@ -24,9 +24,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Switch to `npm run build:cms` and add TINA_CLIENT_ID / TINA_TOKEN
-      # repo secrets once the Tina Cloud project exists.
-      - run: npm run build
+      - run: npm run build:cms
+        env:
+          TINA_CLIENT_ID: ${{ secrets.TINA_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

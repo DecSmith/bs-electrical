@@ -16,7 +16,7 @@ npm run dev:cms      # site + Tina editor at /admin (no cloud account needed loc
 
 1. **Tina Cloud** — create a project at https://app.tina.io, connect this GitHub repo,
    copy the Client ID and a read-only token.
-2. **Cloudflare Pages** — create a project from this repo.
+2. **GitHub Pages** — repo must be public. Settings → Pages → Source: GitHub Actions. The workflow in .github/workflows/deploy.yml deploys on every push to main. Set custom domain to barrysmithelectrical.ie and enforce HTTPS.
    - Build command: `npm run build:cms`
    - Output directory: `dist`
    - Environment variables: `TINA_CLIENT_ID`, `TINA_TOKEN` (from step 1)

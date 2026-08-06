@@ -197,7 +197,7 @@ const sections = [
 <style>
   :root {
     --white: #ffffff;
-    --tint: #f6f8fa;
+    --tint: #f0f3f6;
     --line: #e3e8ec;
     --ink: #1a1d21;
     --muted: #556070;
@@ -668,8 +668,17 @@ const sections = [
 
   /* ---------- contact ---------- */
   .contact {
-    background: var(--tint);
-    border-top: 1px solid var(--line);
+    background: var(--ink);
+    color: var(--white);
+    border-top: 1px solid var(--ink);
+  }
+
+  .contact .eyebrow {
+    color: #7fb8dc;
+  }
+
+  .contact .prose p {
+    color: #b6bec7;
   }
 
   .contact-grid {
@@ -684,7 +693,7 @@ const sections = [
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--muted);
+    color: #8d97a1;
     margin-bottom: 0.25rem;
   }
 
@@ -695,18 +704,22 @@ const sections = [
   }
 
   .contact-grid a {
-    color: var(--accent);
+    color: var(--white);
     text-decoration: none;
+    border-bottom: 1px solid #7fb8dc;
   }
 
   .contact-grid a:hover {
-    color: var(--accent-dark);
-    text-decoration: underline;
+    color: #7fb8dc;
+  }
+
+  .contact a:focus-visible {
+    outline-color: #7fb8dc;
   }
 
   .footer-reg {
     font-size: 0.85rem;
-    color: var(--muted);
+    color: #8d97a1;
     margin: 0;
   }
 

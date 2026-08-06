@@ -4,6 +4,7 @@ import "@fontsource/public-sans/600";
 import "@fontsource/public-sans/700";
 import "@fontsource/ibm-plex-mono/500";
 import content from "../../content/home.json";
+import PylonArt from "../components/PylonArt.astro";
 
 const { company, about, services, installation, clients, staff, contact } = content;
 const telHref = `tel:+353${contact.tel.replace(/\s/g, "").replace(/^0/, "")}`;
@@ -47,7 +48,8 @@ const sections = [
 
     <main id="top">
       <section class="hero">
-        <div class="shell">
+        <div class="shell hero-inner">
+          <div class="hero-art" aria-hidden="true"><PylonArt /></div>
           <p class="hero-reg" data-testid="registration-line">{company.registrationLine}</p>
           <h1>{company.name}</h1>
           <p class="lede">{company.tagline}</p>
@@ -281,8 +283,44 @@ const sections = [
 
   /* ---------- hero ---------- */
   .hero {
+    position: relative;
     padding-block: clamp(4rem, 14vh, 8rem);
     border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    position: relative;
+  }
+
+  .hero-art {
+    position: absolute;
+    right: -6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(22rem, 38vw, 30rem);
+    color: #dfe6ea;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-art :global(svg) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .hero .hero-reg,
+  .hero h1,
+  .hero .lede,
+  .hero .hero-actions {
+    position: relative;
+  }
+
+  @media (max-width: 56rem) {
+    .hero-art {
+      display: none;
+    }
   }
 
   .hero-reg {

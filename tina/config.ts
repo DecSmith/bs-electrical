@@ -118,6 +118,7 @@ export default defineConfig({
               { type: "string", name: "tel", label: "Telephone" },
               { type: "string", name: "mobile", label: "Mobile" },
               { type: "string", name: "email", label: "Email" },
+              { type: "string", name: "linkedin", label: "LinkedIn URL" },
             ],
           },
         ],

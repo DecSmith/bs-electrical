@@ -1,0 +1,90 @@
+{
+  "company": {
+    "name": "Barry Smith Electrical Contractors Ltd",
+    "shortName": "Barry Smith",
+    "descriptor": "Electrical Contractors",
+    "tagline": "Domestic, commercial and industrial electrical contracting across Ireland — from design to build completion.",
+    "registrationLine": "Registered with RECI · Safe Electric · Fully insured and C2 registered"
+  },
+  "about": {
+    "heading": "About the company",
+    "paragraphs": [
+      "Barry Smith Electrical Contractors Ltd is a multi-disciplined organisation specialising in both domestic electrical services and larger commercial electrical engineering contracts. Our expertise covers a diverse and extensive range of commercial, industrial and domestic installations. We work with clients throughout Ireland and offer a comprehensive client engagement service, from design to build completion.",
+      "Our reputation for getting the job completed on time, within budget and to clients' total satisfaction has made us a preferred electrical contractor of choice.",
+      "We have vast experience working closely with engineering consultants, architects and main contractors, and we believe the success of every project lies in the communication between the design, construction and client teams. We are based in Leinster close to the M50 motorway, allowing us to service our client base efficiently."
+    ]
+  },
+  "services": [
+    {
+      "title": "Domestic",
+      "body": "A comprehensive range of domestic electrical services across new builds and renovations — switch board upgrading, rewires, solar panel installations and other energy-efficient technologies."
+    },
+    {
+      "title": "Industrial & Commercial",
+      "body": "A full range of industrial and commercial electrical services including new installation, upgrades of current electrical systems and modification of existing systems in commercial settings."
+    }
+  ],
+  "solar": {
+    "heading": "Photovoltaic solar panels",
+    "body": "Solar energy solutions are a fast-growing addition to homes and businesses around Ireland. Installing solar power technologies brings cost efficiencies to both domestic and commercial clients: it reduces energy consumption for the homeowner, and from a commercial perspective it makes properties more attractive for purchase given BER ratings. We have expertise installing a wide range of innovative solar solutions."
+  },
+  "installation": {
+    "heading": "Electrical installation",
+    "intro": "We undertake projects for a wide variety of clients including property developers, businesses and private individuals. Our range of electrical services includes:",
+    "items": [
+      "Scheduled preventative maintenance",
+      "Fuse board upgrades and replacement",
+      "Additional outlets, single and three phase",
+      "Additional lighting points",
+      "Telephone points",
+      "Computer networking",
+      "Fire alarm systems",
+      "Security lighting",
+      "CCTV systems",
+      "Intercom systems",
+      "3 phase outlets"
+    ]
+  },
+  "clients": {
+    "heading": "Client portfolio",
+    "intro": "A selection of clients we have delivered projects for:",
+    "entries": [
+      {
+        "name": "Carroll Estates Dublin Ltd",
+        "projects": [
+          "Sleepy Hollow, Kinsealy Lane, Malahide, Co. Dublin — housing project & solar installation",
+          "Castleway, Kinsealy Lane, Malahide, Co. Dublin — housing project & solar panel installation",
+          "Seabrook, Rush, Co. Dublin — housing project & solar panel installation"
+        ]
+      },
+      {
+        "name": "Winsac Ltd",
+        "projects": [
+          "Barnagearagh Cove, Skerries, Co. Dublin — housing project & solar panel installation"
+        ]
+      },
+      {
+        "name": "Nspace Ltd",
+        "projects": ["Commercial and domestic installations"]
+      },
+      {
+        "name": "Space Storage",
+        "projects": ["Commercial installation and maintenance"]
+      }
+    ]
+  },
+  "staff": {
+    "heading": "Staff, quality & safety",
+    "paragraphs": [
+      "We pride ourselves on quality workmanship and reliability. All of our staff are qualified to the required industry standards, and ongoing training ensures skills are maintained at an optimum level. Our customer charter is central to our operations and we strive to exceed our clients' expectations through a reliable, professional and dependable service.",
+      "Barry Smith Electrical Contractors Ltd has an exemplary record in completing projects to the highest standard of health and safety."
+    ]
+  },
+  "contact": {
+    "heading": "Contact us",
+    "intro": "Beginning with an initial consultation, we listen to your requirements and our design team works closely with you to deliver a comprehensive set of electrical designs.",
+    "tel": "01 495 3066",
+    "mobile": "087 609 2905",
+    "email": "info@barrysmithelectrical.ie"
+  }
+}

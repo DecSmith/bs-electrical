@@ -1,0 +1,418 @@
+---
+import "@fontsource/big-shoulders-display/500";
+import "@fontsource/big-shoulders-display/700";
+import "@fontsource/public-sans/400";
+import "@fontsource/public-sans/600";
+import "@fontsource/ibm-plex-mono/400";
+import "@fontsource/ibm-plex-mono/500";
+import content from "../../content/home.json";
+
+const { company, about, services, solar, installation, clients, staff, contact } = content;
+const telHref = `tel:+353${contact.tel.replace(/\s/g, "").replace(/^0/, "")}`;
+const mobileHref = `tel:+353${contact.mobile.replace(/\s/g, "").replace(/^0/, "")}`;
+---
+
+<html lang="en-IE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{company.name} — Electrical Contractors, Dublin & Leinster</title>
+    <meta
+      name="description"
+      content={`${company.name}: domestic, commercial and industrial electrical contracting and solar PV installation across Ireland. RECI registered.`}
+    />
+  </head>
+  <body>
+    <header class="hero">
+      <p class="eyebrow" data-testid="registration-line">{company.registrationLine}</p>
+      <h1>
+        <span class="hero-name">{company.shortName}</span>
+        <span class="hero-descriptor">{company.descriptor}</span>
+      </h1>
+      <p class="tagline">{company.tagline}</p>
+      <div class="hero-actions">
+        <a class="btn btn-copper" href="#contact">Request a quote</a>
+        <a class="btn btn-ghost" href={telHref}>{contact.tel}</a>
+      </div>
+      <span class="filament" aria-hidden="true"></span>
+    </header>
+
+    <main class="rail">
+      <section class="section" id="about" aria-labelledby="about-h">
+        <h2 id="about-h">{about.heading}</h2>
+        {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </section>
+
+      <section class="section" id="services" aria-labelledby="services-h">
+        <h2 id="services-h">What we do</h2>
+        <div class="service-cards">
+          {services.map((service) => (
+            <article class="card">
+              <h3>{service.title}</h3>
+              <p>{service.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="section" id="solar" aria-labelledby="solar-h">
+        <h2 id="solar-h">{solar.heading}</h2>
+        <p>{solar.body}</p>
+      </section>
+
+      <section class="section" id="installation" aria-labelledby="installation-h">
+        <h2 id="installation-h">{installation.heading}</h2>
+        <p>{installation.intro}</p>
+        <ul class="board" data-testid="installation-services">
+          {installation.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+
+      <section class="section" id="clients" aria-labelledby="clients-h">
+        <h2 id="clients-h">{clients.heading}</h2>
+        <p>{clients.intro}</p>
+        <dl class="client-list">
+          {clients.entries.map((client) => (
+            <div class="client">
+              <dt>{client.name}</dt>
+              {client.projects.map((project) => <dd>{project}</dd>)}
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="section" id="staff" aria-labelledby="staff-h">
+        <h2 id="staff-h">{staff.heading}</h2>
+        {staff.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </section>
+    </main>
+
+    <footer class="contact" id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">{contact.heading}</h2>
+      <p class="contact-intro">{contact.intro}</p>
+      <dl class="contact-grid">
+        <div>
+          <dt>Tel</dt>
+          <dd><a href={telHref}>{contact.tel}</a></dd>
+        </div>
+        <div>
+          <dt>Mobile</dt>
+          <dd><a href={mobileHref}>{contact.mobile}</a></dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href={`mailto:${contact.email}`}>{contact.email}</a></dd>
+        </div>
+      </dl>
+      <p class="footer-reg">{company.name} · {company.registrationLine}</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --ink: #171a1e;
+    --ink-soft: #2a2f36;
+    --fog: #eef1f3;
+    --white: #ffffff;
+    --blue: #1789c6;
+    --copper: #b06a2c;
+    --copper-bright: #d98f4a;
+    --display: "Big Shoulders Display", sans-serif;
+    --body: "Public Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", monospace;
+    --rail-x: clamp(1.25rem, 6vw, 4rem);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--fog);
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    background: var(--ink);
+    color: var(--white);
+    padding: clamp(4rem, 12vh, 7rem) var(--rail-x) clamp(3.5rem, 10vh, 6rem);
+    overflow: hidden;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--copper-bright);
+    margin: 0 0 1.5rem;
+  }
+
+  .hero h1 {
+    margin: 0;
+    font-family: var(--display);
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+
+  .hero-name {
+    display: block;
+    font-weight: 700;
+    font-size: clamp(3rem, 11vw, 7rem);
+    letter-spacing: 0.01em;
+  }
+
+  .hero-descriptor {
+    display: block;
+    font-weight: 500;
+    font-size: clamp(1.4rem, 4.5vw, 2.75rem);
+    letter-spacing: 0.14em;
+    color: var(--blue);
+    margin-top: 0.35rem;
+  }
+
+  .tagline {
+    max-width: 34rem;
+    margin: 2rem 0 2.5rem;
+    color: #c8cdd3;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+
+  .btn-copper {
+    background: var(--copper);
+    color: var(--white);
+  }
+
+  .btn-copper:hover {
+    background: var(--copper-bright);
+  }
+
+  .btn-ghost {
+    border-color: #3d434b;
+    color: var(--white);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--copper-bright);
+    color: var(--copper-bright);
+  }
+
+  /* filament: the glowing conductor entering the page from the hero */
+  .filament {
+    position: absolute;
+    left: var(--rail-x);
+    bottom: 0;
+    width: 2px;
+    height: clamp(2.5rem, 8vh, 5rem);
+    background: linear-gradient(to bottom, transparent, var(--copper-bright));
+    box-shadow: 0 0 12px 1px rgba(217, 143, 74, 0.6);
+  }
+
+  /* ---------- circuit rail ---------- */
+  .rail {
+    position: relative;
+    padding: 1rem 0 3rem;
+  }
+
+  .rail::before {
+    content: "";
+    position: absolute;
+    left: var(--rail-x);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--copper);
+    opacity: 0.55;
+  }
+
+  .section {
+    position: relative;
+    max-width: 46rem;
+    padding: clamp(2rem, 6vh, 3.5rem) var(--rail-x) 0
+      calc(var(--rail-x) + 2.25rem);
+  }
+
+  /* junction node at each section heading */
+  .section h2::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--rail-x) - 5px);
+    width: 12px;
+    height: 12px;
+    margin-top: 0.55em;
+    border-radius: 50%;
+    background: var(--fog);
+    border: 2px solid var(--copper);
+  }
+
+  .section h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin: 0 0 1rem;
+  }
+
+  /* ---------- services ---------- */
+  .service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1rem;
+  }
+
+  .card {
+    background: var(--white);
+    border-top: 3px solid var(--blue);
+    padding: 1.5rem;
+  }
+
+  .card h3 {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .card p {
+    margin: 0;
+  }
+
+  /* ---------- installation "distribution board" ---------- */
+  .board {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: 1px;
+    background: #d5dade;
+    border: 1px solid #d5dade;
+  }
+
+  .board li {
+    background: var(--white);
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+    font-family: var(--mono);
+  }
+
+  /* ---------- clients ---------- */
+  .client-list {
+    margin: 1.5rem 0 0;
+  }
+
+  .client {
+    margin-bottom: 1.5rem;
+  }
+
+  .client dt {
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 0.25rem;
+  }
+
+  .client dd {
+    margin: 0 0 0.2rem;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- contact ---------- */
+  .contact {
+    background: var(--ink);
+    color: var(--white);
+    padding: clamp(3rem, 8vh, 5rem) var(--rail-x);
+  }
+
+  .contact h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    margin: 0 0 1rem;
+  }
+
+  .contact-intro {
+    max-width: 34rem;
+    color: #c8cdd3;
+    margin: 0 0 2rem;
+  }
+
+  .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin: 0 0 2.5rem;
+  }
+
+  .contact-grid dt {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--copper-bright);
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-grid dd {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  .contact-grid a {
+    color: var(--white);
+    text-decoration: none;
+    border-bottom: 1px solid var(--copper);
+  }
+
+  .contact-grid a:hover {
+    color: var(--copper-bright);
+  }
+
+  .footer-reg {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: #7d858e;
+    margin: 0;
+  }
+
+  a:focus-visible,
+  .btn:focus-visible {
+    outline: 2px solid var(--copper-bright);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 40rem) {
+    .rail::before,
+    .filament,
+    .section h2::before {
+      display: none;
+    }
+
+    .section {
+      padding-left: var(--rail-x);
+    }
+  }
+</style>

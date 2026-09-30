@@ -36,6 +36,49 @@ const sections = [
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://barrysmithelectrical.ie/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://barrysmithelectrical.ie/" />
+    <meta property="og:title" content={`${company.name} — Electrical Contractors, Dublin & Leinster`} />
+    <meta
+      property="og:description"
+      content="Domestic, commercial and industrial electrical contracting and solar PV installation across Ireland. RECI registered."
+    />
+    <meta property="og:locale" content="en_IE" />
+    <meta name="twitter:card" content="summary" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Electrician",
+        name: company.name,
+        url: "https://barrysmithelectrical.ie/",
+        telephone: ["+353876092905", "+35314953066"],
+        email: contact.email,
+        areaServed: [
+          { "@type": "AdministrativeArea", name: "Dublin" },
+          { "@type": "AdministrativeArea", name: "Leinster" },
+          { "@type": "Country", name: "Ireland" },
+        ],
+        address: {
+          "@type": "PostalAddress",
+          addressRegion: "Leinster",
+          addressCountry: "IE",
+        },
+        sameAs: [contact.linkedin],
+        knowsAbout: [
+          "Domestic electrical installation",
+          "Commercial and industrial electrical services",
+          "Solar PV installation",
+          "Fire alarm systems",
+          "EV charger installation",
+        ],
+        memberOf: {
+          "@type": "Organization",
+          name: "Register of Electrical Contractors of Ireland (RECI)",
+        },
+      })}
+    />
     <title>{company.name} — Electrical Contractors, Dublin & Leinster</title>
     <meta
       name="description"

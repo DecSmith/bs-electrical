@@ -1,10 +1,6 @@
 ---
-import "@fontsource/public-sans/400";
-import "@fontsource/public-sans/600";
-import "@fontsource/public-sans/700";
-import "@fontsource/ibm-plex-mono/500";
+import "@fontsource/josefin-slab/400";
 import content from "../../content/home.json";
-import PylonArt from "../components/PylonArt.astro";
 
 const { company, about, services, installation, clients, staff, contact, domestic } = content;
 
@@ -19,14 +15,7 @@ const splitProject = (project) => {
 };
 const telHref = `tel:+353${contact.tel.replace(/\s/g, "").replace(/^0/, "")}`;
 const mobileHref = `tel:+353${contact.mobile.replace(/\s/g, "").replace(/^0/, "")}`;
-
-const sections = [
-  { id: "about", index: "01", label: "About" },
-  { id: "services", index: "02", label: "Services" },
-  { id: "installation", index: "03", label: "Installation" },
-  { id: "clients", index: "04", label: "Clients" },
-  { id: "contact", index: "05", label: "Contact" },
-];
+const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt: "Space Self Storage" } };
 ---
 
 <html lang="en-IE">
@@ -86,172 +75,141 @@ const sections = [
     />
   </head>
   <body>
-    <a class="skip-link" href="#about">Skip to content</a>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="site-header">
-      <div class="shell header-row">
-        <a class="brand" href="#top">{company.shortName} <span>Electrical</span></a>
-        <nav aria-label="Sections">
-          <ul class="nav-list">
-            {sections.slice(0, 4).map((section) => (
-              <li><a href={`#${section.id}`}>{section.label}</a></li>
-            ))}
-          </ul>
-        </nav>
-        <a class="btn header-phone" href={mobileHref}>{contact.mobile}</a>
+    <header class="hero" id="top">
+      <div class="hero-top">
+        <p class="logo">{company.shortName} <span>{company.descriptor} Ltd</span></p>
+        <p class="hero-phone">Call <a href={mobileHref}>{contact.mobile}</a></p>
+      </div>
+      <div class="intro">
+        <h1>{company.name}</h1>
+        <p>{company.tagline}</p>
+        <p class="intro-reg" data-testid="registration-line">{company.registrationLine}</p>
       </div>
     </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="shell hero-inner">
-          <div class="hero-art" aria-hidden="true"><PylonArt /></div>
-          <p class="hero-reg" data-testid="registration-line">{company.registrationLine}</p>
-          <h1>{company.name}</h1>
-          <p class="lede">{company.tagline}</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact">Request a quote</a>
-            <a class="btn btn-secondary" href="#services">See our services</a>
-          </div>
-        </div>
+    <main id="main">
+      <section class="split" aria-label="Services">
+        {services.map((service, index) => (
+          <article class={index === 0 ? "split-block bg-bright" : "split-block bg-dark"}>
+            <h2>{service.title}</h2>
+            <p>{service.body}</p>
+          </article>
+        ))}
       </section>
 
-      <section class="section" id="about" aria-labelledby="about-h">
-        <div class="shell">
-          <p class="eyebrow">01 — About</p>
-          <h2 id="about-h">{about.heading}</h2>
-          <div class="prose">
+      <section class="full-block bg-light" id="about" aria-labelledby="about-h">
+        <div class="flag">
+          <div class="flag-body">
+            <h2 id="about-h">{about.heading}</h2>
             {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
             <p class="list-heading">{about.expertiseHeading}</p>
-            <ul class="expertise-list">
+            <ul class="disc-list">
               {about.expertise.map((item) => <li>{item}</li>)}
             </ul>
             {about.closingParagraphs.map((paragraph) => <p>{paragraph}</p>)}
           </div>
-        </div>
-      </section>
-
-      <section class="section section-alt" id="services" aria-labelledby="services-h">
-        <div class="shell">
-          <p class="eyebrow">02 — Services</p>
-          <h2 id="services-h">What we do</h2>
-          <div class="card-grid">
-            {services.map((service) => (
-              <article class="card">
-                <h3>{service.title}</h3>
-                <p>{service.body}</p>
-              </article>
-            ))}
+          <div class="flag-img flag-img-r">
+            <img src="/img/solar-panel.jpg" alt="" width="500" height="446" loading="lazy" />
           </div>
         </div>
       </section>
 
-
-      <section class="section" id="installation" aria-labelledby="installation-h">
-        <div class="shell">
-          <p class="eyebrow">03 — Installation</p>
-          <h2 id="installation-h">{installation.heading}</h2>
-          <div class="prose">
+      <section class="full-block bg-dark" id="installation" aria-labelledby="installation-h">
+        <div class="flag">
+          <div class="flag-img flag-img-l">
+            <img src="/img/blueprint.jpg" alt="" width="822" height="626" loading="lazy" />
+          </div>
+          <div class="flag-body">
+            <h2 id="installation-h">{installation.heading}</h2>
             <p>{installation.intro}</p>
+            <ul class="two-col-list" data-testid="installation-services">
+              {installation.items.map((item) => <li>{item}</li>)}
+            </ul>
           </div>
-          <ul class="service-list" data-testid="installation-services">
-            {installation.items.map((item) => <li>{item}</li>)}
+        </div>
+      </section>
+
+      <section class="full-block bg-light clients" id="clients" aria-labelledby="clients-h">
+        <h2 id="clients-h">{clients.heading}</h2>
+        <p class="clients-intro">{clients.intro}</p>
+
+        <article class="featured-client">
+          <h3>{featuredClient.name}</h3>
+          <ul class="project-list">
+            {featuredClient.projects.map((project) => {
+              const { year, detail } = splitProject(project);
+              return (
+                <li>
+                  {year && <span class="project-year">{year}</span>}
+                  <span>{detail}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </article>
+
+        <div class="client-row">
+          {otherClients.map((client) => (
+            <article class="client-card">
+              {clientLogos[client.name] ? (
+                <h3><img src={clientLogos[client.name].src} alt={clientLogos[client.name].alt} width="266" height="72" loading="lazy" /></h3>
+              ) : (
+                <h3>{client.name}</h3>
+              )}
+              {client.projects.map((project) => <p>{project}</p>)}
+            </article>
+          ))}
+        </div>
+
+        <div class="domestic-block">
+          <h3>{domestic.heading}</h3>
+          <p>{domestic.intro}</p>
+          <ul class="disc-list">
+            {domestic.items.map((item) => <li>{item}</li>)}
           </ul>
         </div>
-      </section>
 
-      <section class="section section-alt" id="clients" aria-labelledby="clients-h">
-        <div class="shell">
-          <p class="eyebrow">04 — Clients</p>
-          <h2 id="clients-h">{clients.heading}</h2>
-          <div class="prose">
-            <p>{clients.intro}</p>
-          </div>
-          <article class="featured-client">
-            <div class="featured-head">
-              <h3>{featuredClient.name}</h3>
-              <p class="featured-meta">{featuredClient.projects.length} developments</p>
-            </div>
-            <ul class="project-grid">
-              {featuredClient.projects.map((project) => {
-                const { year, detail } = splitProject(project);
-                return (
-                  <li>
-                    {year && <span class="project-year">{year}</span>}
-                    <span>{detail}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          </article>
-          <div class="client-row">
-            {otherClients.map((client) => (
-              <article class="client-card">
-                <div class="client-card-head">
-                  <h3>{client.name}</h3>
-                  {client.tag && <span class="client-tag">{client.tag}</span>}
-                </div>
-                {client.projects.map((project) => <p>{project}</p>)}
-              </article>
-            ))}
-          </div>
-          <div class="domestic-block">
-            <h3>{domestic.heading}</h3>
-            <p class="domestic-intro">{domestic.intro}</p>
-            <ul class="domestic-list">
-              {domestic.items.map((item) => <li>{item}</li>)}
-            </ul>
-          </div>
-          <div class="prose quality-note">
-            {staff.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-          </div>
-        </div>
+        <blockquote class="quality-note">
+          {staff.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </blockquote>
       </section>
     </main>
 
-    <footer class="section contact" id="contact" aria-labelledby="contact-h">
-      <div class="shell">
-        <p class="eyebrow">05 — Contact</p>
+    <footer class="contact bg-bright" id="contact" aria-labelledby="contact-h">
+      <div class="contact-body">
         <h2 id="contact-h">{contact.heading}</h2>
-        <div class="prose">
-          <p>{contact.intro}</p>
+        <p>{contact.intro}</p>
+        <ul class="contact-list">
+          <li><span>Tel:</span><a href={telHref}>{contact.tel}</a></li>
+          <li><span>Mobile:</span><a href={mobileHref}>{contact.mobile}</a></li>
+          <li><span>Email:</span><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+          <li><span>LinkedIn:</span><a href={contact.linkedin} rel="noopener">Barry Smith</a></li>
+        </ul>
+        <div class="badges">
+          <img src="/img/reci.png" alt="RECI registered electrical contractor" width="106" height="63" />
+          <img src="/img/safe_elec.jpg" alt="Safe Electric registered electrical contractor, fully insured and C2 registered" width="158" height="82" />
         </div>
-        <dl class="contact-grid">
-          <div>
-            <dt>Tel</dt>
-            <dd><a href={telHref}>{contact.tel}</a></dd>
-          </div>
-          <div>
-            <dt>Mobile</dt>
-            <dd><a href={mobileHref}>{contact.mobile}</a></dd>
-          </div>
-          <div>
-            <dt>Email</dt>
-            <dd><a href={`mailto:${contact.email}`}>{contact.email}</a></dd>
-          </div>
-          <div>
-            <dt>LinkedIn</dt>
-            <dd><a href={contact.linkedin} rel="noopener">Barry Smith</a></dd>
-          </div>
-        </dl>
         <p class="footer-reg">{company.name} · {company.registrationLine}</p>
+      </div>
+      <div class="contact-art">
+        <img src="/img/tower.png" alt="" width="318" height="470" />
       </div>
     </footer>
   </body>
 </html>
 
 <style>
+  /* Original 2015 palette. Blue darkened from #138acb to #0f7bb6 so white text passes WCAG AA (4.6:1). */
   :root {
+    --blue: #0f7bb6;
+    --grey: #b9b9ba;
     --white: #ffffff;
-    --tint: #e8edf2;
-    --line: #d6dde3;
-    --ink: #1a1d21;
-    --muted: #556070;
-    --accent: #0f6ea3;
-    --accent-dark: #0c5a86;
-    --body: "Public Sans", system-ui, sans-serif;
-    --mono: "IBM Plex Mono", monospace;
-    --shell: 64rem;
+    --page: #eeeeee;
+    --ink: #111111;
+    --body: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --logo: "Josefin Slab", Georgia, serif;
   }
 
   * {
@@ -260,7 +218,6 @@ const sections = [
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4.5rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -270,18 +227,48 @@ const sections = [
   }
 
   body {
-    margin: 0;
+    max-width: 1600px;
+    margin: 0 auto;
     font-family: var(--body);
-    font-size: 1.0625rem;
-    line-height: 1.65;
+    font-weight: 300;
+    font-size: clamp(1.05rem, 1.4vw, 1.375rem);
+    line-height: 1.8;
     color: var(--ink);
-    background: var(--white);
+    background: var(--page);
   }
 
-  .shell {
-    max-width: var(--shell);
-    margin: 0 auto;
-    padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+  h1,
+  h2,
+  h3 {
+    font-weight: 300;
+    line-height: 1.15;
+    margin: 0 0 1.5rem;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3.125rem);
+  }
+
+  h3 {
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  }
+
+  p {
+    margin: 0 0 1.5rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
   }
 
   .skip-link {
@@ -298,480 +285,436 @@ const sections = [
     left: 0;
   }
 
-  /* ---------- header ---------- */
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
+  .bg-bright {
+    background: var(--blue);
+    color: var(--white);
   }
 
-  .header-row {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    min-height: 3.75rem;
-  }
-
-  .brand {
-    font-weight: 700;
-    text-decoration: none;
+  .bg-dark {
+    background: var(--grey);
     color: var(--ink);
-    white-space: nowrap;
   }
 
-  .brand span {
-    color: var(--accent);
-  }
-
-  .nav-list {
-    display: flex;
-    gap: 1.25rem;
-    list-style: none;
-    margin: 0 auto;
-    padding: 0;
-  }
-
-  .nav-list a {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--muted);
-    text-decoration: none;
-  }
-
-  .nav-list a:hover {
-    color: var(--accent);
-  }
-
-  .header-phone {
-    margin-left: auto;
-    border: 1px solid var(--line);
+  .bg-light {
+    background: var(--white);
     color: var(--ink);
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  .header-phone:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  @media (max-width: 48rem) {
-    .nav-list {
-      display: none;
-    }
   }
 
   /* ---------- hero ---------- */
   .hero {
     position: relative;
-    padding-block: clamp(4rem, 14vh, 8rem);
-    border-bottom: 1px solid var(--line);
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 650px;
+    color: var(--white);
+    background:
+      linear-gradient(90deg, rgba(20, 18, 15, 0.75) 0%, rgba(20, 18, 15, 0.35) 55%, rgba(20, 18, 15, 0) 75%),
+      url("/img/hero-bulb.jpg") center top / cover no-repeat #2a2622;
   }
 
-  .hero-inner {
-    position: relative;
+  .hero-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 20px 40px;
   }
 
-  .hero-art {
-    position: absolute;
-    right: -6rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: clamp(22rem, 38vw, 30rem);
-    color: #dfe6ea;
-    pointer-events: none;
-    user-select: none;
+  .logo {
+    font-family: var(--logo);
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    line-height: 0.95;
+    margin: 0;
   }
 
-  .hero-art :global(svg) {
-    width: 100%;
-    height: auto;
+  .logo span {
     display: block;
+    font-size: 0.4em;
+    line-height: 1.3;
   }
 
-  .hero .hero-reg,
-  .hero h1,
-  .hero .lede,
-  .hero .hero-actions {
-    position: relative;
+  .hero-phone {
+    font-size: clamp(1.25rem, 2.2vw, 1.875rem);
+    margin: 0;
+    line-height: 58px;
   }
 
-  @media (max-width: 56rem) {
-    .hero-art {
-      display: none;
+  .hero-phone a {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .intro {
+    padding: 40px;
+    width: 65%;
+    max-width: 36rem;
+  }
+
+  .intro h1 {
+    font-size: clamp(1.6rem, 2.6vw, 2rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .intro p {
+    max-width: 1200px;
+    margin-bottom: 0.75rem;
+  }
+
+  .intro-reg {
+    font-size: 0.85em;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 58.75em) {
+    .hero {
+      min-height: 0;
+      background-position: center, 30% top;
+      text-align: center;
+    }
+
+    .hero-top {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .intro {
+      width: 100%;
+      max-width: none;
+      padding: 120px 24px 32px;
     }
   }
 
-  .hero-reg {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 1.25rem;
-  }
-
-  .hero h1 {
-    font-size: clamp(2.1rem, 6vw, 3.75rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.08;
-    margin: 0 0 1.25rem;
-    max-width: 22ch;
-  }
-
-  .lede {
-    font-size: clamp(1.1rem, 2.2vw, 1.3rem);
-    color: var(--muted);
-    max-width: 36rem;
-    margin: 0 0 2.25rem;
-  }
-
-  .hero-actions {
+  /* ---------- services split ---------- */
+  .split {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
   }
 
-  .btn {
-    display: inline-block;
-    padding: 0.7rem 1.35rem;
-    border-radius: 0.5rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
+  .split-block {
+    flex: 1 1 50%;
+    min-height: 450px;
+    padding: 120px 40px;
   }
 
-  .btn-primary {
-    background: var(--accent);
-    color: var(--white);
+  .split-block p {
+    margin: 0;
   }
 
-  .btn-primary:hover {
-    background: var(--accent-dark);
+  @media (max-width: 58.75em) {
+    .split-block {
+      flex-basis: 100%;
+      min-height: 0;
+      padding: 56px 24px;
+      text-align: center;
+    }
   }
 
-  .btn-secondary {
-    border: 1px solid var(--line);
-    color: var(--ink);
+  /* ---------- flag sections (text + angled image) ---------- */
+  .full-block {
+    padding: 60px 40px;
   }
 
-  .btn-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+  .flag {
+    display: flex;
+    align-items: center;
+    gap: 40px;
   }
 
-  /* ---------- sections ---------- */
-  .section {
-    padding-block: clamp(3.5rem, 10vh, 6rem);
+  .flag-body {
+    flex: 1 1 auto;
+    padding: 0 40px;
   }
 
-  .section-alt {
-    background: var(--tint);
-    border-block: 1px solid var(--line);
+  .flag-body p {
+    max-width: 700px;
   }
 
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 0.75rem;
+  .flag-img {
+    position: relative;
+    flex: 0 0 auto;
+    width: min(500px, 40%);
+    overflow: hidden;
   }
 
-  .section h2 {
-    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    line-height: 1.15;
-    margin: 0 0 1.25rem;
+  .flag-img img {
+    display: block;
+    width: 100%;
   }
 
-  .prose {
-    max-width: 42rem;
+  .flag-img::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
   }
 
-  .prose p {
-    margin: 0 0 1rem;
-    color: var(--muted);
+  .flag-img-r::after {
+    left: 0;
+    background: var(--white);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
   }
 
-  .prose p:last-child {
-    margin-bottom: 0;
+  .flag-img-l::after {
+    right: 0;
+    background: var(--grey);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+
+  @media (max-width: 58.75em) {
+    .full-block {
+      padding: 0 0 24px;
+    }
+
+    .flag {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .flag-img {
+      width: 100%;
+      order: -1;
+    }
+
+    .flag-img::after {
+      display: none;
+    }
+
+    .flag-body {
+      padding: 36px 24px 12px;
+    }
+
+    .flag-body p {
+      max-width: 100%;
+    }
   }
 
   .list-heading {
-    font-weight: 600;
-    color: var(--ink);
+    margin-bottom: 0.5rem;
   }
 
-  .expertise-list {
-    margin: 0 0 1.25rem;
-    padding: 0 0 0 1.2rem;
-    color: var(--muted);
+  .disc-list,
+  .two-col-list {
+    list-style: disc outside;
+    margin: 0 0 1.5rem;
+    padding: 0 0 0 1.25em;
   }
 
-  .expertise-list li {
-    margin-bottom: 0.35rem;
-  }
-
-  /* ---------- services cards ---------- */
-  .card-grid {
+  .two-col-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .card {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    padding: 1.75rem;
-  }
-
-  .card h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin: 0 0 0.6rem;
-  }
-
-  .card p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.98rem;
-  }
-
-  /* ---------- installation list ---------- */
-  .service-list {
-    list-style: none;
-    margin: 2rem 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-    gap: 0.6rem 2rem;
-    max-width: 52rem;
-  }
-
-  .service-list li {
-    padding: 0.55rem 0 0.55rem 1.4rem;
-    position: relative;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.98rem;
-  }
-
-  .service-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 1.05rem;
-    width: 0.45rem;
-    height: 0.45rem;
-    border-radius: 50%;
-    background: var(--accent);
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    column-gap: 1.5rem;
+    font-size: 0.92em;
   }
 
   /* ---------- clients ---------- */
+  .clients {
+    text-align: center;
+  }
+
+  .clients-intro {
+    max-width: 700px;
+    margin-inline: auto;
+  }
+
+  .featured-client,
+  .client-row,
+  .domestic-block,
+  .quality-note {
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+
   .featured-client {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    padding: 1.75rem;
+    border-top: 4px solid var(--blue);
+    padding-top: 2rem;
     margin-top: 2rem;
   }
 
-  .featured-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .featured-client h3,
-  .client-card h3,
-  .domestic-block h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0;
-  }
-
-  .featured-meta {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin: 0;
-  }
-
-  .project-grid {
+  .project-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-    gap: 0.4rem 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 0 2rem;
+    text-align: left;
   }
 
-  .project-grid li {
+  .project-list li {
     display: flex;
     gap: 0.75rem;
     align-items: baseline;
-    padding: 0.45rem 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.92rem;
-    color: var(--muted);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #d4d4d4;
+    font-size: 0.9em;
   }
 
   .project-year {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--accent);
+    color: var(--blue);
+    font-weight: 400;
     white-space: nowrap;
   }
 
   .client-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 1.5rem;
+    margin-top: 3rem;
   }
 
   .client-card {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    padding: 1.25rem 1.5rem;
+    background: var(--page);
+    padding: 1.75rem 1.5rem;
   }
 
-  .client-card-head {
+  .client-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    min-height: 72px;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .client-tag {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--accent);
-    background: #e7f1f8;
-    border-radius: 999px;
-    padding: 0.2rem 0.7rem;
-    white-space: nowrap;
+    justify-content: center;
   }
 
   .client-card p {
     margin: 0;
-    color: var(--muted);
-    font-size: 0.92rem;
+    font-size: 0.9em;
   }
 
   .domestic-block {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    padding: 1.25rem 1.5rem;
-    margin-top: 1rem;
+    margin-top: 3rem;
   }
 
-  .domestic-intro {
-    color: var(--muted);
-    font-size: 0.95rem;
-    margin: 0.4rem 0 0.75rem;
-  }
-
-  .domestic-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .domestic-block .disc-list {
+    list-style-position: inside;
+    padding-left: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .domestic-list li {
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 0.35rem 0.9rem;
-    font-size: 0.9rem;
+    justify-content: center;
+    gap: 0 2rem;
   }
 
   .quality-note {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--line);
+    margin-top: 3rem;
+    margin-bottom: 0;
+    padding: 2.5rem 0 0;
+    border-top: 1px solid #d4d4d4;
+    font-style: italic;
   }
 
-  /* ---------- contact ---------- */
+  .quality-note p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 58.75em) {
+    .clients {
+      padding: 48px 24px;
+    }
+  }
+
+  /* ---------- contact footer ---------- */
   .contact {
-    background: var(--ink);
-    color: var(--white);
-    border-top: 1px solid var(--ink);
-  }
-
-  .contact .eyebrow {
-    color: #7fb8dc;
-  }
-
-  .contact .prose p {
-    color: #b6bec7;
-  }
-
-  .contact-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 2.5rem;
-    margin: 2rem 0 2.5rem;
+    align-items: flex-end;
   }
 
-  .contact-grid dt {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #8d97a1;
-    margin-bottom: 0.25rem;
+  .contact-body {
+    flex: 1 1 50%;
+    padding: 80px 80px 60px;
   }
 
-  .contact-grid dd {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
+  .contact-body > p {
+    max-width: 700px;
   }
 
-  .contact-grid a {
-    color: var(--white);
+  .contact-list {
+    list-style: none;
+    margin: 0 0 2.5rem;
+    padding: 0;
+    font-size: clamp(1.15rem, 2vw, 1.875rem);
+  }
+
+  .contact-list li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+  }
+
+  .contact-list span {
+    display: inline-block;
+    min-width: 7.5rem;
+  }
+
+  .contact-list a {
     text-decoration: none;
-    border-bottom: 1px solid #7fb8dc;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    overflow-wrap: anywhere;
   }
 
-  .contact-grid a:hover {
-    color: #7fb8dc;
+  .contact-list a:hover {
+    border-bottom-color: var(--white);
   }
 
-  .contact a:focus-visible {
-    outline-color: #7fb8dc;
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 2rem;
+  }
+
+  .badges img {
+    background: var(--white);
+    padding: 6px;
   }
 
   .footer-reg {
-    font-size: 0.85rem;
-    color: #8d97a1;
+    font-size: 0.8em;
     margin: 0;
   }
 
-  a:focus-visible,
-  .btn:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
+  .contact-art {
+    flex: 1 1 50%;
+    text-align: center;
+  }
+
+  .contact-art img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 58.75em) {
+    .contact {
+      text-align: center;
+    }
+
+    .contact-body {
+      flex-basis: 100%;
+      padding: 48px 24px 24px;
+    }
+
+    .contact-list li {
+      justify-content: center;
+    }
+
+    .contact-list span {
+      min-width: 0;
+    }
+
+    .badges {
+      justify-content: center;
+    }
+
+    .contact-art {
+      flex-basis: 100%;
+    }
+
+    .contact-art img {
+      width: 200px;
+    }
   }
 </style>

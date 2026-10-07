@@ -1,0 +1,132 @@
+---
+import "../styles/site.css";
+import content from "../../content/home.json";
+import HeroTop from "../components/HeroTop.astro";
+import ContactFooter from "../components/ContactFooter.astro";
+import { toTelHref } from "../lib/phone.js";
+
+const { company, ev, evPage, contact } = content;
+
+const pageUrl = "https://barrysmithelectrical.ie/ev-charger-installation/";
+const mobileHref = toTelHref(contact.mobile);
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      name: "EV charger installation",
+      serviceType: "Home electric vehicle charger supply and installation",
+      url: pageUrl,
+      description: evPage.metaDescription,
+      areaServed: [
+        { "@type": "AdministrativeArea", name: "Dublin" },
+        { "@type": "AdministrativeArea", name: "Leinster" },
+      ],
+      provider: {
+        "@type": "Electrician",
+        name: company.name,
+        url: "https://barrysmithelectrical.ie/",
+        telephone: mobileHref.replace("tel:", ""),
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://barrysmithelectrical.ie/" },
+        { "@type": "ListItem", position: 2, name: ev.heading, item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<html lang="en-IE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/fraulein.woff" as="font" type="font/woff" crossorigin />
+    <link rel="canonical" href={pageUrl} />
+    <title>{evPage.metaTitle}</title>
+    <meta name="description" content={evPage.metaDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:title" content={evPage.metaTitle} />
+    <meta property="og:description" content={evPage.metaDescription} />
+    <meta property="og:image" content="https://barrysmithelectrical.ie/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Barry Smith Electrical Contractors Ltd — domestic, commercial, solar PV and EV chargers, Dublin and Leinster" />
+    <meta property="og:locale" content="en_IE" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="hero hero-sub" id="top">
+      <HeroTop company={company} contact={contact} linkHome />
+      <div class="intro">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li aria-current="page">{ev.heading}</li>
+          </ol>
+        </nav>
+        <h1>{evPage.heading}</h1>
+        <p>{evPage.lede}</p>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="full-block bg-light page-section" aria-labelledby="overview-h">
+        <div class="page-inner">
+          <h2 id="overview-h">{ev.heading}</h2>
+          <p>{ev.intro}</p>
+          <p><a class="text-link" href="#contact">{ev.cta}</a></p>
+        </div>
+      </section>
+
+      <section class="full-block bg-bright page-section ev" aria-labelledby="included-h">
+        <div class="page-inner">
+          <h2 id="included-h">{ev.includedHeading}</h2>
+          <ul class="disc-list" data-testid="ev-page-included">
+            {ev.included.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="full-block bg-dark page-section" aria-labelledby="grant-h">
+        <div class="page-inner">
+          <h2 id="grant-h">{ev.grantHeading}</h2>
+          <p>{ev.grantBody}</p>
+          <h3>{evPage.grantStepsHeading}</h3>
+          <ol class="step-list" data-testid="ev-grant-steps">
+            {evPage.grantSteps.map((step) => <li>{step}</li>)}
+          </ol>
+          <p><a class="text-link" href={ev.grantUrl} rel="noopener">{ev.grantLinkText}</a></p>
+        </div>
+      </section>
+
+      <section class="full-block bg-light page-section" aria-labelledby="faq-h">
+        <div class="page-inner">
+          <h2 id="faq-h">{evPage.faqHeading}</h2>
+          <dl class="faq-list" data-testid="ev-faq">
+            {evPage.faq.map((entry) => (
+              <div>
+                <dt>{entry.question}</dt>
+                <dd>{entry.answer}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="source-note">{evPage.sourceNote}</p>
+        </div>
+      </section>
+    </main>
+
+    <ContactFooter company={company} contact={contact} />
+  </body>
+</html>

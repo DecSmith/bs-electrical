@@ -1,0 +1,28 @@
+---
+import { toTelHref } from "../lib/phone.js";
+
+const { company, contact } = Astro.props;
+const telHref = contact.tel ? toTelHref(contact.tel) : null;
+const mobileHref = toTelHref(contact.mobile);
+---
+
+<footer class="contact bg-bright" id="contact" aria-labelledby="contact-h">
+  <div class="contact-body">
+    <h2 id="contact-h">{contact.heading}</h2>
+    <p>{contact.intro}</p>
+    <ul class="contact-list">
+      {telHref && <li><span>Tel:</span><a href={telHref}>{contact.tel}</a></li>}
+      <li><span>Mobile:</span><a href={mobileHref}>{contact.mobile}</a></li>
+      <li><span>Email:</span><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+      <li><span>LinkedIn:</span><a href={contact.linkedin} rel="noopener">Barry Smith</a></li>
+    </ul>
+    <div class="badges">
+      <img src="/img/reci.png" alt="RECI registered electrical contractor" width="106" height="63" />
+      <img src="/img/safe_elec.jpg" alt="Safe Electric registered electrical contractor, fully insured and C2 registered" width="158" height="82" />
+    </div>
+    <p class="footer-reg">{company.name} · {company.registrationLine}</p>
+  </div>
+  <div class="contact-art">
+    <img src="/img/tower.png" alt="" width="318" height="470" />
+  </div>
+</footer>

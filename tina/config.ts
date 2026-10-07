@@ -97,6 +97,33 @@ export default defineConfig({
           },
           {
             type: "object",
+            name: "evPage",
+            label: "EV charger page (/ev-charger-installation/)",
+            fields: [
+              { type: "string", name: "metaTitle", label: "Google title" },
+              { type: "string", name: "metaDescription", label: "Google description", ui: { component: "textarea" } },
+              { type: "string", name: "heading", label: "Page heading" },
+              { type: "string", name: "lede", label: "Intro line", ui: { component: "textarea" } },
+              { type: "string", name: "homeLinkText", label: "Link text on homepage" },
+              { type: "string", name: "grantStepsHeading", label: "Grant steps heading" },
+              { type: "string", name: "grantSteps", label: "Grant steps", list: true, ui: { component: "textarea" } },
+              { type: "string", name: "faqHeading", label: "Questions heading" },
+              {
+                type: "object",
+                name: "faq",
+                label: "Questions",
+                list: true,
+                ui: { itemProps: (item) => ({ label: item?.question }) },
+                fields: [
+                  { type: "string", name: "question", label: "Question" },
+                  { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+                ],
+              },
+              { type: "string", name: "sourceNote", label: "Grant note", ui: { component: "textarea" } },
+            ],
+          },
+          {
+            type: "object",
             name: "clients",
             label: "Client portfolio",
             fields: [

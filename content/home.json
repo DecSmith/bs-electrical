@@ -133,5 +133,44 @@
       "Certification and test records for the SEAI grant claim"
     ],
     "cta": "Contact us for a quote on an EV charger installation."
+  },
+  "evPage": {
+    "metaTitle": "EV Charger Installation Dublin | Barry Smith Electrical",
+    "metaDescription": "Home EV charger supply and installation across Dublin and Leinster by Safe Electric registered electricians. Certified for the SEAI €300 home charger grant.",
+    "heading": "EV charger installation in Dublin & Leinster",
+    "lede": "Home electric vehicle chargers supplied and installed by Safe Electric registered electricians, certified for the SEAI home charger grant.",
+    "homeLinkText": "More about EV charger installation",
+    "grantStepsHeading": "How the SEAI grant works",
+    "grantSteps": [
+      "Apply online with SEAI. You'll need the MPRN from your electricity bill and your Eircode.",
+      "SEAI emails you a Letter of Offer.",
+      "We install your charger. The installation must be completed within 6 months of the offer.",
+      "We provide the completion certificate and test record sheet. You submit these with your invoice and photos in SEAI's payment request.",
+      "SEAI processes payment, which takes approximately 4 to 6 weeks."
+    ],
+    "faqHeading": "Common questions",
+    "faq": [
+      {
+        "question": "Do I need to own an electric car to get the grant?",
+        "answer": "No. SEAI's home charger grant is open to homeowners whether they own an electric vehicle or not."
+      },
+      {
+        "question": "How much is the grant?",
+        "answer": "Up to €300 towards the purchase and installation of a home charger."
+      },
+      {
+        "question": "Who is eligible?",
+        "answer": "Homeowners with off-street parking at their property. A property that has already received this grant, or a free ESB ecars charger, is not eligible."
+      },
+      {
+        "question": "Can you install a charger I've already bought?",
+        "answer": "Yes. We can supply the charger, or install one you have already bought."
+      },
+      {
+        "question": "Which areas do you cover?",
+        "answer": "We install EV chargers across Dublin and Leinster, including Wicklow."
+      }
+    ],
+    "sourceNote": "Grant details are from SEAI and can change. Check SEAI's website for the current terms before you apply."
   }
 }

@@ -1,0 +1,17 @@
+---
+import { toTelHref } from "../lib/phone.js";
+
+const { company, contact, linkHome = false } = Astro.props;
+const mobileHref = toTelHref(contact.mobile);
+---
+
+<div class="hero-top">
+  {linkHome ? (
+    <a class="logo logo-link" href="/" aria-label={`${company.name} — home`}>
+      {company.shortName} <span>{company.descriptor} Ltd</span>
+    </a>
+  ) : (
+    <p class="logo">{company.shortName} <span>{company.descriptor} Ltd</span></p>
+  )}
+  <p class="hero-phone">Call <a href={mobileHref}>{contact.mobile}</a></p>
+</div>

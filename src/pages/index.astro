@@ -1,5 +1,4 @@
 ---
-import "@fontsource/josefin-slab/400";
 import content from "../../content/home.json";
 
 const { company, about, services, installation, ev, clients, staff, contact, domestic } = content;
@@ -25,6 +24,7 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/fraulein.woff" as="font" type="font/woff" crossorigin />
     <link rel="canonical" href="https://barrysmithelectrical.ie/" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://barrysmithelectrical.ie/" />
@@ -219,6 +219,16 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
   </body>
 </html>
 
+<style is:global>
+  @font-face {
+    font-family: "Fraulein";
+    src: url("/fonts/fraulein.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+</style>
+
 <style>
   /* Original 2015 palette. Blue darkened from #138acb to #0f7bb6 so white text passes WCAG AA (4.6:1). */
   :root {
@@ -228,7 +238,7 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
     --page: #eeeeee;
     --ink: #111111;
     --body: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --logo: "Josefin Slab", Georgia, serif;
+    --logo: "Fraulein", Georgia, serif;
   }
 
   * {
@@ -341,17 +351,20 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
     padding: 20px 40px;
   }
 
+  /* Original sizing: 120px logo on a 40px line, 48.5px descriptor on the same 40px line. */
   .logo {
     font-family: var(--logo);
-    font-size: clamp(3.5rem, 9vw, 7.5rem);
-    line-height: 0.95;
+    font-size: clamp(3rem, 17vw, 7.5rem);
+    line-height: 0.34em;
+    white-space: nowrap;
     margin: 0;
+    padding-top: 0.17em;
   }
 
   .logo span {
     display: block;
-    font-size: 0.4em;
-    line-height: 1.3;
+    font-size: 0.404em;
+    line-height: 0.83em;
   }
 
   .hero-phone {
@@ -396,6 +409,7 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
     .hero-top {
       flex-direction: column;
       align-items: center;
+      padding: 20px 24px;
     }
 
     .intro {
@@ -523,7 +537,7 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
 
   .two-col-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
     column-gap: 1.5rem;
     font-size: 0.92em;
   }
@@ -541,7 +555,7 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
 
   .ev-columns {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
     gap: 2rem 4rem;
     margin-top: 1rem;
   }
@@ -595,7 +609,7 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
     gap: 0 2rem;
     text-align: left;
   }
@@ -617,7 +631,7 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
 
   .client-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
     gap: 1.5rem;
     margin-top: 3rem;
   }

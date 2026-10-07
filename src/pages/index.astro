@@ -12,8 +12,9 @@ const splitProject = (project) => {
   }
   return { year: null, detail: project };
 };
-const telHref = `tel:+353${contact.tel.replace(/\s/g, "").replace(/^0/, "")}`;
-const mobileHref = `tel:+353${contact.mobile.replace(/\s/g, "").replace(/^0/, "")}`;
+const toTelHref = (number) => `tel:+353${number.replace(/\s/g, "").replace(/^0/, "")}`;
+const telHref = contact.tel ? toTelHref(contact.tel) : null;
+const mobileHref = toTelHref(contact.mobile);
 const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt: "Space Self Storage" } };
 ---
 
@@ -43,7 +44,7 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
         "@type": "Electrician",
         name: company.name,
         url: "https://barrysmithelectrical.ie/",
-        telephone: ["+353876092905", "+35314953066"],
+        telephone: [mobileHref, telHref].filter(Boolean).map((href) => href.replace("tel:", "")),
         email: contact.email,
         areaServed: [
           { "@type": "AdministrativeArea", name: "Dublin" },
@@ -201,7 +202,7 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
         <h2 id="contact-h">{contact.heading}</h2>
         <p>{contact.intro}</p>
         <ul class="contact-list">
-          <li><span>Tel:</span><a href={telHref}>{contact.tel}</a></li>
+          {telHref && <li><span>Tel:</span><a href={telHref}>{contact.tel}</a></li>}
           <li><span>Mobile:</span><a href={mobileHref}>{contact.mobile}</a></li>
           <li><span>Email:</span><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
           <li><span>LinkedIn:</span><a href={contact.linkedin} rel="noopener">Barry Smith</a></li>

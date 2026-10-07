@@ -81,6 +81,22 @@ export default defineConfig({
           },
           {
             type: "object",
+            name: "ev",
+            label: "EV charger installation",
+            fields: [
+              { type: "string", name: "heading", label: "Heading" },
+              { type: "string", name: "intro", label: "Intro", ui: { component: "textarea" } },
+              { type: "string", name: "grantHeading", label: "Grant heading" },
+              { type: "string", name: "grantBody", label: "Grant text", ui: { component: "textarea" } },
+              { type: "string", name: "grantLinkText", label: "Grant link text" },
+              { type: "string", name: "grantUrl", label: "Grant link URL" },
+              { type: "string", name: "includedHeading", label: "Included list heading" },
+              { type: "string", name: "included", label: "Included list", list: true },
+              { type: "string", name: "cta", label: "Closing line" },
+            ],
+          },
+          {
+            type: "object",
             name: "clients",
             label: "Client portfolio",
             fields: [

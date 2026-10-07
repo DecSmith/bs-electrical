@@ -121,5 +121,21 @@
       "Extensions and renovations",
       "EV car charger installations"
     ]
+  },
+  "ev": {
+    "heading": "EV charger installation",
+    "intro": "We supply and install home electric vehicle chargers across Dublin and Leinster, or install a charger you have already bought. Every installation is carried out by our Safe Electric registered electricians, certified and tested to current Irish wiring standards.",
+    "grantHeading": "SEAI home charger grant",
+    "grantBody": "Homeowners with off-street parking can claim up to €300 towards the cost of a home charger through the SEAI EV Home Charger Grant. You don't need to own an electric car yet to apply. The grant requires a Safe Electric registered electrician, and we provide the completion certificate and test records you need for your payment claim.",
+    "grantLinkText": "SEAI EV Home Charger Grant details",
+    "grantUrl": "https://seai.ie/grants/electric-vehicle-grants/electric-vehicle-home-charger-grant/",
+    "includedHeading": "What's included:",
+    "included": [
+      "Site survey and advice on charger location and cable route",
+      "Supply and installation of a wall-mounted home charger, or installation of your own",
+      "Fuse board and supply checks, with upgrades where needed",
+      "Certification and test records for the SEAI grant claim"
+    ],
+    "cta": "Contact us for a quote on an EV charger installation."
   }
 }

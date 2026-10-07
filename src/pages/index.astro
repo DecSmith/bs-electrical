@@ -2,7 +2,7 @@
 import "@fontsource/josefin-slab/400";
 import content from "../../content/home.json";
 
-const { company, about, services, installation, clients, staff, contact, domestic } = content;
+const { company, about, services, installation, ev, clients, staff, contact, domestic } = content;
 
 const [featuredClient, ...otherClients] = clients.entries;
 
@@ -128,6 +128,27 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
               {installation.items.map((item) => <li>{item}</li>)}
             </ul>
           </div>
+        </div>
+      </section>
+
+      <section class="full-block bg-bright ev" id="ev-chargers" aria-labelledby="ev-h">
+        <div class="ev-inner">
+          <h2 id="ev-h">{ev.heading}</h2>
+          <p>{ev.intro}</p>
+          <div class="ev-columns">
+            <div>
+              <h3>{ev.grantHeading}</h3>
+              <p>{ev.grantBody}</p>
+              <p><a class="ev-link" href={ev.grantUrl} rel="noopener">{ev.grantLinkText}</a></p>
+            </div>
+            <div>
+              <h3>{ev.includedHeading}</h3>
+              <ul class="disc-list" data-testid="ev-included">
+                {ev.included.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+          <p class="ev-cta"><a href="#contact">{ev.cta}</a></p>
         </div>
       </section>
 
@@ -507,6 +528,44 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     column-gap: 1.5rem;
     font-size: 0.92em;
+  }
+
+  /* ---------- EV chargers ---------- */
+  .ev-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  .ev-inner > p {
+    max-width: 800px;
+  }
+
+  .ev-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 2rem 4rem;
+    margin-top: 1rem;
+  }
+
+  .ev a {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .ev-cta {
+    margin: 1rem 0 0;
+  }
+
+  @media (max-width: 58.75em) {
+    .ev {
+      padding: 0;
+    }
+
+    .ev-inner {
+      padding: 48px 24px;
+    }
   }
 
   /* ---------- clients ---------- */

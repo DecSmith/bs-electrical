@@ -173,6 +173,7 @@ export default defineConfig({
               { type: "string", name: "mobile", label: "Mobile" },
               { type: "string", name: "email", label: "Email" },
               { type: "string", name: "linkedin", label: "LinkedIn URL" },
+              { type: "string", name: "googleProfile", label: "Google Business Profile link" },
             ],
           },
         ],

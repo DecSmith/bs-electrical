@@ -28,6 +28,7 @@ const structuredData = {
         name: company.name,
         url: "https://barrysmithelectrical.ie/",
         telephone: mobileHref.replace("tel:", ""),
+        sameAs: [contact.linkedin, contact.googleProfile].filter(Boolean),
       },
     },
     {

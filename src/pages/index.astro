@@ -59,7 +59,8 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
           addressRegion: "Leinster",
           addressCountry: "IE",
         },
-        sameAs: [contact.linkedin],
+        sameAs: [contact.linkedin, contact.googleProfile].filter(Boolean),
+        ...(contact.googleProfile ? { hasMap: contact.googleProfile } : {}),
         knowsAbout: [
           "Domestic electrical installation",
           "Commercial and industrial electrical services",

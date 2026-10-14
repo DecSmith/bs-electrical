@@ -654,3 +654,31 @@
     padding: 48px 24px;
   }
 }
+
+.service-links p {
+  margin: 0 0 0.5rem;
+}
+
+.service-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.service-links a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.faq-list-on-grey > div {
+  border-bottom-color: #8e8e8f;
+}
+
+@media (max-width: 58.75em) {
+  .service-links ul {
+    justify-content: center;
+  }
+}

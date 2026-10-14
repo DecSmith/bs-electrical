@@ -5,7 +5,7 @@ import HeroTop from "../components/HeroTop.astro";
 import ContactFooter from "../components/ContactFooter.astro";
 import { toTelHref } from "../lib/phone.js";
 
-const { company, about, services, installation, ev, evPage, clients, staff, contact, domestic } = content;
+const { company, about, services, installation, ev, evPage, servicePages, clients, staff, contact, domestic } = content;
 
 const [featuredClient, ...otherClients] = clients.entries;
 
@@ -127,6 +127,15 @@ const clientLogos = { "Space Storage": { src: "/img/spacestorage_logo.gif", alt:
             <ul class="two-col-list" data-testid="installation-services">
               {installation.items.map((item) => <li>{item}</li>)}
             </ul>
+            <nav class="service-links" aria-label="Service pages">
+              <p>More about:</p>
+              <ul>
+                {servicePages.map((servicePage) => (
+                  <li><a href={`/${servicePage.slug}/`}>{servicePage.homeLinkText}</a></li>
+                ))}
+                <li><a href="/ev-charger-installation/">{ev.heading}</a></li>
+              </ul>
+            </nav>
           </div>
         </div>
       </section>

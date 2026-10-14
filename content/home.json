@@ -222,50 +222,6 @@
       ],
       "sourceNote": "Information on Registered Electrical Contractors and completion certificates is from the Commission for Regulation of Utilities (CRU).",
       "sourceUrl": "https://www.cru.ie/consumer-information/home-safety/electrical-works/"
-    },
-    {
-      "slug": "fire-alarms-cctv",
-      "metaTitle": "Fire Alarms & CCTV Dublin | Barry Smith Electrical",
-      "metaDescription": "Fire alarm, CCTV, security lighting, intercom and access control installation and maintenance for homes and businesses across Dublin and Leinster.",
-      "heading": "Fire alarms, CCTV & security in Dublin & Leinster",
-      "lede": "Fire alarm, CCTV, security lighting, intercom and access control systems for homes and commercial premises.",
-      "homeLinkText": "Fire alarms, CCTV & security",
-      "introHeading": "Fire alarm and security systems",
-      "intro": [
-        "We install fire alarm and security systems for homeowners, property developers and businesses across Dublin and Leinster, and provide scheduled preventative maintenance.",
-        "Barry Smith Electrical Contractors Ltd is RECI registered, Safe Electric certified and fully insured, with over 20 years' experience in domestic, commercial and industrial electrical work."
-      ],
-      "listHeading": "Systems we install:",
-      "items": [
-        "Fire alarm systems",
-        "CCTV systems",
-        "Security lighting",
-        "Intercom systems",
-        "Access control systems",
-        "Data cabling and computer networking",
-        "Scheduled preventative maintenance"
-      ],
-      "faqHeading": "Common questions",
-      "faq": [
-        {
-          "question": "What standard applies to fire alarm systems in Ireland?",
-          "answer": "The current Irish Standard is I.S. 3218:2024, published by the NSAI. It gives guidelines for the planning, design, installation, commissioning, servicing and maintenance of fire detection and fire alarm systems, including in residential and domestic premises."
-        },
-        {
-          "question": "Do you work on commercial premises?",
-          "answer": "Yes. We work for homeowners, property developers and businesses, on domestic, commercial and industrial projects."
-        },
-        {
-          "question": "Do you offer maintenance?",
-          "answer": "Yes. We provide scheduled preventative maintenance."
-        },
-        {
-          "question": "Which areas do you cover?",
-          "answer": "We work across Dublin and Leinster, including Wicklow."
-        }
-      ],
-      "sourceNote": "Information on I.S. 3218:2024 is from the National Standards Authority of Ireland (NSAI).",
-      "sourceUrl": "https://www.nsai.ie/about/news/irish-standard-for-fire-detection-and-fire-alarm-systems-i.s-32182024/"
     }
   ]
 }

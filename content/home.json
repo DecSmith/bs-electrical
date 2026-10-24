@@ -137,9 +137,9 @@
   },
   "evPage": {
     "metaTitle": "EV Charger Installation Dublin | Barry Smith Electrical",
-    "metaDescription": "Home EV charger supply and installation across Dublin and Leinster by Safe Electric registered electricians. Certified for the SEAI €300 home charger grant.",
+    "metaDescription": "Home EV charger installation across Dublin and Leinster. Tesla Certified Installer, Safe Electric registered, certified for the SEAI €300 home charger grant.",
     "heading": "EV charger installation in Dublin & Leinster",
-    "lede": "Home electric vehicle chargers supplied and installed by Safe Electric registered electricians, certified for the SEAI home charger grant.",
+    "lede": "Home electric vehicle chargers supplied and installed by Safe Electric registered electricians. Tesla Certified Installer for the Tesla Wall Connector, and certified for the SEAI home charger grant.",
     "homeLinkText": "More about EV charger installation",
     "grantStepsHeading": "How the SEAI grant works",
     "grantSteps": [
@@ -162,6 +162,10 @@
       {
         "question": "Who is eligible?",
         "answer": "Homeowners with off-street parking at their property. A property that has already received this grant, or a free ESB ecars charger, is not eligible."
+      },
+      {
+        "question": "Can you install and commission a Tesla Wall Connector?",
+        "answer": "Yes. We are a Tesla Certified Installer, so we can install and commission the Tesla Wall Connector."
       },
       {
         "question": "Can you install a charger I've already bought?",

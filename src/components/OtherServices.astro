@@ -1,0 +1,22 @@
+---
+import content from "../../content/home.json";
+
+const { currentPath } = Astro.props;
+const { servicePages, ev } = content;
+
+const allLinks = [
+  ...servicePages.map((servicePage) => ({ href: `/${servicePage.slug}/`, label: servicePage.homeLinkText })),
+  { href: "/ev-charger-installation/", label: ev.heading },
+  { href: "/", label: "All services" },
+];
+const links = allLinks.filter((link) => link.href !== currentPath);
+---
+
+<nav class="service-links other-services" aria-label="Other services">
+  <p>Other services:</p>
+  <ul>
+    {links.map((link) => (
+      <li><a href={link.href}>{link.label}</a></li>
+    ))}
+  </ul>
+</nav>

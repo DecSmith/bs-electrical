@@ -41,3 +41,11 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      # Tell Bing (and other IndexNow search engines) that pages have changed.
+      - name: Notify IndexNow
+        continue-on-error: true
+        run: |
+          urls=$(curl -s https://barrysmithelectrical.ie/sitemap-0.xml | grep -o '<loc>[^<]*' | sed 's/<loc>//' | jq -R . | jq -s -c .)
+          curl -s -o /dev/null -w "IndexNow response: %{http_code}\n" -X POST https://api.indexnow.org/indexnow \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"barrysmithelectrical.ie\",\"key\":\"f18eddc176abc1bab24d1761bea30154\",\"keyLocation\":\"https://barrysmithelectrical.ie/f18eddc176abc1bab24d1761bea30154.txt\",\"urlList\":$urls}"

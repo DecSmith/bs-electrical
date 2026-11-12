@@ -3,6 +3,7 @@ import "../styles/site.css";
 import content from "../../content/home.json";
 import HeroTop from "../components/HeroTop.astro";
 import ContactFooter from "../components/ContactFooter.astro";
+import OtherServices from "../components/OtherServices.astro";
 import { toTelHref } from "../lib/phone.js";
 
 const { company, ev, evPage, contact } = content;
@@ -124,6 +125,7 @@ const structuredData = {
             ))}
           </dl>
           <p class="source-note">{evPage.sourceNote}</p>
+          <OtherServices currentPath="/ev-charger-installation/" />
         </div>
       </section>
     </main>
